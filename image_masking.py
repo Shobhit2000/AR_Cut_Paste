@@ -70,14 +70,14 @@ def main(img):
     mask = mask.astype(int)
 
     img_rgba = get_sticker(img, mask)
-    # img_rgba.save('obj_sticker.png')
+    img_rgba.save('obj_sticker.png')
 
     # plt.imshow(img_rgba)
     # plt.show()
     return img_rgba
 
 if __name__ == "__main__":
-    # img = cv2.imread("C://Users//SHOBHIT//Downloads//dog.jpg")
+    # img = cv2.imread("C://Users//SHOBHIT//Downloads//car1.jpg")
     # img = np.asarray(img)
     img = []
     _ = main(img)

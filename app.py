@@ -1,6 +1,7 @@
 import image_masking
 import numpy as np
 import cv2
+from PIL import Image
 from flask import Flask, jsonify, request, make_response
 
 app = Flask(__name__)
@@ -13,17 +14,18 @@ def index():
 def transfer():
     if request.method == 'POST':
 
-        # get image from app in multipart format
-        print("Posted file: {}".format(request.files['file']))
-        file = request.files['file']
-        img = cv2.imread(file)
-        img_array = np.asarray(img)
+        file = request.files['image']
+        img = Image.open(file)
+        # img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
 
-        # get the processed image from the base code
-        img_rgba = image_masking.main(img_array)
+        # print(img.shape)
+        # cv2.imshow('win',img)
+        # cv2.waitKey(0)
+        # img_array = np.asarray(img)
+
+        img_rgba = image_masking.main(img)
 
         return jsonify({"img_array": img_rgba})
 
-
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)

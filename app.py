@@ -16,16 +16,13 @@ def transfer():
 
         file = request.files['image']
         img = Image.open(file)
-        # img = cv2.cvtColor(np.array(img), cv2.COLOR_RGB2BGR)
-
-        # print(img.shape)
-        # cv2.imshow('win',img)
-        # cv2.waitKey(0)
-        # img_array = np.asarray(img)
-
+        img = np.asarray(img)
+        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         img_rgba = image_masking.main(img)
+        cv2.imwrite('sticker.png', img_rgba)
 
-        return jsonify({"img_array": img_rgba})
+        #return jsonify({"img_array": img_rgba})
+        return "DONE"
 
 if __name__ == "__main__":
     app.run(debug=False)

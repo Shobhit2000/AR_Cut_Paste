@@ -2,7 +2,7 @@ import image_masking
 import numpy as np
 import cv2
 from PIL import Image
-from flask import Flask, jsonify, request, make_response
+from flask import Flask, jsonify, request, make_response, send_file
 
 app = Flask(__name__)
 
@@ -21,8 +21,7 @@ def transfer():
         img_rgba = image_masking.main(img)
         cv2.imwrite('sticker.png', img_rgba)
 
-        #return jsonify({"img_array": img_rgba})
-        return "DONE"
+        return send_file('sticker.png')
 
 if __name__ == "__main__":
     app.run(debug=False)
